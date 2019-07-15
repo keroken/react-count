@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => <Counter />;
+
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      textValue: 'initial value'
+    }
+  }
+
+  handleTextChange(textValue) {
+    this.setState({textValue: textValue});
+  }
+
+  handleCountChange(textLength) {
+    this.setState({count: textLength});
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <div>文字数: {this.state.count}</div>
+        <textarea
+          type="text"
+          onChange={e => this.handleTextChange(e.target.value)}
+          onKeyUp={e => this.handleCountChange(e.target.value.length)}
+        />
+      </React.Fragment>
+    );
+  }
 }
+
 
 export default App;
